@@ -19,7 +19,8 @@ int main() {
 		}
 	} else if(f > 0) {
 		wait(&status);
-		if(WIFEXITED(status)) {				//Check whether child process executed successfully
+		// check for error during execution of child process
+		if(WIFEXITED(status)) {				
 			printf("***Child process executed successfully***\n");
 		}
 		else {
