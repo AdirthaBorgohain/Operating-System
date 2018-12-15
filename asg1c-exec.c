@@ -1,5 +1,3 @@
-/* Write a C program like the assignment 1(b). and overlay a user designed program into the address space of the child process using execv() system call.Again use wait() system call to synchronize the execution of parent program in your program until child process finishes.Here use the macro WIFEXITED to capture the returned status of the child in parent process. Also demonstrate the use of argument vector to print the program name by the child process. */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -14,13 +12,12 @@ int main() {
 		// Compile execDemo.c before proceeding: gcc execDemo.c -o execDemo
 		int i = execv(args[0],args);
 		if(i == -1) {
-			printf("execv process failed\n");
+			printf("execv process failed. Please execute \"gcc execDemo.c -o execDemo\" before proceeding\n");
 			exit(1);
 		}
 	} else if(f > 0) {
 		wait(&status);
-		// check for error during execution of child process
-		if(WIFEXITED(status)) {				
+		if(WIFEXITED(status)) { 			//Check whether child process executed successfully
 			printf("***Child process executed successfully***\n");
 		}
 		else {
@@ -34,5 +31,4 @@ int main() {
 	}
 	return 0;
 }
-
 
